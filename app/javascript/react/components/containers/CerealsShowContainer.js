@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CerealShow from "./CerealShow"
 
-
 const CerealsShowContainer = (props) => {
     const [ cerealInfo, setCerealInfo ] = useState({})
     let cerealId = props.match.params.id
@@ -10,21 +9,17 @@ const CerealsShowContainer = (props) => {
         fetch(`/api/cereals/${cerealId}`)
             .then(response => {
                 if (response.ok) {
-                    return response
+                    return response.json()
                 } else {
-                    throw new Error(`${response.status}: ${response.statusText}`)
+                    const error = new Error(`${response.status}: ${response.statusText}`);
+                    throw (error)
                 }
             })
-            .then(validatedResponse => validatedResponse.json())
             .then(body => {
-                setCerealInfo(body.cereal)
+                setCerealInfo(body.cerealInfo)
             })
-            .catch(error => {
-                console.log(`Error fetching cereal list: ${error.message}`)
-            })
+            .catch(error => console.error(`Error in fetch: ${error.message}`));
     }, [])
-
-
 
     return(
         <div>
