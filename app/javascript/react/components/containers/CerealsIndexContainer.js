@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom"
+import CerealTile from "./CerealTile"
 
 const CerealsIndexContainer = props => {
   const [cereals, setCereals] = useState([])
@@ -23,12 +25,12 @@ const CerealsIndexContainer = props => {
 
   const cerealTiles = cereals.map(cereal => {
     return(
-      <li key={cereal.id}>
-        <p>
-          <span><strong>Name: </strong>{cereal.name}</span><br/>
-          <span><strong>Description: </strong>{cereal.description}</span>
-        </p>
-      </li>
+      <div>
+          <CerealTile
+            key={cereal.id}
+            cerealData={cereal}
+          />
+      </div>
     )
   })
 
