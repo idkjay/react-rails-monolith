@@ -1,4 +1,4 @@
-class Api::CerealsControler < ApplicationController
+class Api::CerealsController < ApplicationController
     protect_from_forgery unless: -> { request.format.json? }
 
     def show
